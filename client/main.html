@@ -1,0 +1,92 @@
+<!-- <head>
+  <title>FeedPolley</title>
+</head> -->
+
+<!-- <body>
+  <h1>Welcome to Meteor!</h1>
+  {{> register}}
+</body> -->
+
+<!-- the main template will show up
+on every router ie /home /register /login ...-->
+<template name="main">
+    <h1>Polley</h1>
+    {{> navigation}}
+    {{#if currentUser}}
+        {{> lists}}
+    {{/if}}
+    {{> yield}}
+    <hr />
+    <p>Copyright &copy; Polley, 2016-2017.</p>
+</template>
+
+<!-- pages begin-->
+
+<!-- the home template is the first page that
+a user sees-->
+<template name="home">
+    <p>Welcome to the Polley application.</p>
+</template>
+
+
+<!-- the page where users can register-->
+<template name="register">
+    <h2>Register</h2>
+    <form class="register">
+        <p>Email: <input type="email" name="email"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <p><input type="submit" value="Register"></p>
+    </form>
+</template>
+
+<!-- the page where users can login-->
+<template name="login">
+    <h2>Login</h2>
+    <form class="login">
+        <p>Email: <input type="email" name="email"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <p><input type="submit" value="Login"></p>
+    </form>
+</template>
+
+<!-- template to navigate through pages-->
+<template name="navigation">
+  <ul>
+      <li><a href="{{pathFor route='home'}}">Home</a></li>
+      {{#if currentUser}}
+        <li><a href="#" class="logout">Logout</a></li>
+      {{else}}
+        <li><a href="{{pathFor route='register'}}">Register</a></li>
+        <li><a href="{{pathFor route='login'}}">Login</a></li>
+      {{/if}}
+  </ul>
+</template>
+
+<!-- pages end -->
+
+<!-- polls begin-->
+
+
+<!-- template to add a poll-->
+
+<template name="addList">
+    <form>Create a poll:
+        <input type="text" placeholder="List name here..." name="listName">
+    </form>
+</template>
+
+<template name="listPage">
+    <h2>Tasks: {{name}}</h2>
+</template>
+
+<template name="lists">
+    <h2>Lists</h2>
+    {{> addList}}
+    <ul>
+        {{#each list}}
+            <!-- <li>{{name}}</li> -->
+            <li><a href="{{pathFor route='listPage'}}">{{name}}</a></li>
+        {{/each}}
+    </ul>
+</template>
+<!-- polls end -->
